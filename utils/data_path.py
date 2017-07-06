@@ -29,3 +29,5 @@ TrainCsv = ROOT_PATH + "SMPCUP2017任务2训练集/trainingData.csv"
 
 BlogContentTxt = ROOT_PATH + "SMPCUP2017数据集/1_BlogContent.txt"
 BlogContentCsv = ROOT_PATH + "SMPCUP2017数据集/BlogContent.csv"
+
+CSDNMODEL = ROOT_PATH + "SMPCUP2017任务2训练集/cdsn_model.m"
