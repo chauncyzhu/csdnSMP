@@ -37,6 +37,7 @@ CSDNMODELPath = ROOT_PATH + "csdn_model/"
 
 CSDNMODEL = ROOT_PATH + "SMPCUP2017_train/csdn_model.m"
 """
+
 ROOT_PATH = "D:/Data/SMPCUP2017数据集/"
 
 PostTxt = ROOT_PATH + "SMPCUP2017数据集/2_Post.txt"   #用户发表博客记录文件，用户行为数据
