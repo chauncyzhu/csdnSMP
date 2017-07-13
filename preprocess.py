@@ -163,8 +163,6 @@ def blog_info(filename):
     read_special_txt(dp.BlogContentTxt,blog_list,dp.BlogContentCsv)
 
 
-
-
 if __name__ == '__main__':
     # train_data(dp.TrainCsv)
     blog_info(dp.TrainCsv)
