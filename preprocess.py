@@ -33,11 +33,12 @@ def read_txt(filename,columns_name,target_file=None):
 
     return pd_data
 
-def read_special_txt(filename,blog_list):
+def read_special_txt(filename,blog_list,target_file=None):
     """
     读取txt数据
     :param filename:所有的blog数据
     :param blog_list:所有的需要用到的blog uid
+    :param target_file:需要写入的target_file
     :return:
     """
     blog_dict = {}
@@ -51,9 +52,12 @@ def read_special_txt(filename,blog_list):
 
     print("blog length---------",len(blog_dict))
 
-    for key,value in blog_dict.items():
-        print(key)
-        print(value)
+    pd_data = pd.DataFrame({'blog_uid':blog_dict.keys(),'blog_info':blog_dict.values()})
+
+    if target_file:
+        pd_data.to_csv(target_file,encoding="utf8")
+        print("文件写入完毕！")
+
 
 def read_pandas(filename):
     """
@@ -65,7 +69,6 @@ def read_pandas(filename):
     pd_data['blog_uid'] = pd_data['blog_uid'].apply(eval)
     print(pd_data)
 
-    print("type",type(pd_data['blog_uid'][0]))
     return pd_data
 
 
@@ -157,7 +160,7 @@ def blog_info(filename):
         blog_list.extend(row['blog_uid'])
     blog_list = list(set(blog_list))
     print("一共有------",len(blog_list),blog_list)
-    read_special_txt(dp.BlogContentTxt,blog_list)
+    read_special_txt(dp.BlogContentTxt,blog_list,dp.BlogContentCsv)
 
 
 
@@ -165,7 +168,7 @@ def blog_info(filename):
 if __name__ == '__main__':
     # train_data(dp.TrainCsv)
     blog_info(dp.TrainCsv)
-    #
+
 
 
 """
