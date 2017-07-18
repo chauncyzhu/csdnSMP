@@ -61,7 +61,15 @@ FollowCSV = ROOT_PATH + "SMPCUP2017数据集/Follow.csv"  #用户之间关注关系文件，社
 LetterCSV = ROOT_PATH + "SMPCUP2017数据集/Letter.csv"  #用户之间私信记录文件，社交关系数据
 
 TrainTxt = ROOT_PATH + "SMPCUP2017任务2训练集/SMPCUP2017_TrainingData_Task2.txt"
-TrainCsv = ROOT_PATH + "SMPCUP2017任务2训练集/trainingData.csv"
+TrainCsv = ROOT_PATH + "Train_DATA/trainingData.csv"
+TrainPKL = ROOT_PATH + "Train_DATA/trainingData.pkl"
+
 
 BlogContentTxt = ROOT_PATH + "SMPCUP2017数据集/1_BlogContent.txt"
 BlogContentCsv = ROOT_PATH + "SMPCUP2017数据集/BlogContent.csv"
+
+SOME_BLOGCONTENT_VECTOR_NORMALIZE = ROOT_PATH + "Train_DATA/some_blogcontent_vector_normalize.pkl"
+
+DevTxt = ROOT_PATH + "SMPCUP2017验证集/SMPCUP2017_ValidationSet_Task2.txt"
+DevCsv = ROOT_PATH + "Train_DATA/devData.csv"
+DevPKL = ROOT_PATH + "Train_DATA/devData.pkl"
