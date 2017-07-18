@@ -2,8 +2,6 @@
 """
     数据路径
 """
-"""
-ROOT_PATH = "/home/cike/PycharmProjects/pythondata/csdnSMP/"
 ROOT_PATH = "/home/cike/PycharmProjects/pythondata/csdnSMP/"
 
 PostTxt = ROOT_PATH + "data/2_Post.txt"   #用户发表博客记录文件，用户行为数据
@@ -27,17 +25,23 @@ FollowCSV = ROOT_PATH + "data/Follow.csv"  #用户之间关注关系文件，社交关系数据
 LetterCSV = ROOT_PATH + "data/Letter.csv"  #用户之间私信记录文件，社交关系数据
 
 TrainTxt = ROOT_PATH + "SMPCUP2017_train/SMPCUP2017_TrainingData_Task2.txt"
-TrainCsv = ROOT_PATH + "SMPCUP2017_train/trainingData.csv"
+TrainCsv = ROOT_PATH + "Train_DATA/trainingData.csv"
+TrainPKL = ROOT_PATH + "Train_DATA/trainingData.pkl"
 
 BlogContentTxt = ROOT_PATH + "data/1_BlogContent.txt"
-BlogContentCsv = ROOT_PATH + "data/BlogContent.csv"
+SomeBlogContentTxt = ROOT_PATH + "Train_DATA/BlogContent.txt"
+BlogContentCsv = ROOT_PATH + "Train_DATA/BlogContent.csv"
 
 BlogContentSegPath = ROOT_PATH + "seg_data/"
 CSDNMODELPath = ROOT_PATH + "csdn_model/"
 
-CSDNMODEL = ROOT_PATH + "SMPCUP2017_train/csdn_model.m"
-"""
+CSDNMODEL = CSDNMODELPath + "csdn_model_merge_0_2.m"
 
+DevTxt = ROOT_PATH + "SMPCUP2017验证集/SMPCUP2017_ValidationSet_Task2.txt"
+DevCsv = ROOT_PATH + "Train_DATA/devData.csv"
+DevPKL = ROOT_PATH + "Train_DATA/devData.pkl"
+
+"""
 ROOT_PATH = "D:/Data/SMPCUP2017数据集/"
 
 PostTxt = ROOT_PATH + "SMPCUP2017数据集/2_Post.txt"   #用户发表博客记录文件，用户行为数据
@@ -73,3 +77,4 @@ SOME_BLOGCONTENT_VECTOR_NORMALIZE = ROOT_PATH + "Train_DATA/some_blogcontent_vec
 DevTxt = ROOT_PATH + "SMPCUP2017验证集/SMPCUP2017_ValidationSet_Task2.txt"
 DevCsv = ROOT_PATH + "Train_DATA/devData.csv"
 DevPKL = ROOT_PATH + "Train_DATA/devData.pkl"
+"""
