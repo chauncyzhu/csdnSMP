@@ -4,7 +4,7 @@
 """
 import pandas as pd
 import numpy as np
-import utils.data_path as dp
+import data_path as dp
 from keras.preprocessing import sequence
 from keras.models import Sequential
 from keras.layers import Embedding
@@ -47,10 +47,10 @@ def lstm(trainData, trainMark, testData, embedding_dim, embedding_matrix, maxlen
     model.add(Embedding(len(embedding_matrix), embedding_dim, weights=[embedding_matrix], mask_zero=False,
                         input_length=maxlen))  # 指定输入层，将高维的one-hot转成低维的embedding表示，第一个参数大或等于0的整数，输入数据最大下标+1，第二个参数大于0的整数，代表全连接嵌入的维度
     # lstm层，也是比较核心的层
-    model.add(LSTM(1024))  # 256对应Embedding输出维度，128是输入维度可以推导出来
+    model.add(LSTM(256))  # 256对应Embedding输出维度，128是输入维度可以推导出来
     model.add(Dropout(0.5))  # 每次在参数更新的时候以一定的几率断开层的链接，用于防止过拟合
     model.add(Dense(output_len))  # 全连接，这里用于输出层，1代表输出层维度，128代表LSTM层维度可以自行推导出来
-    model.add(Activation('sigmoid'))  # 输出用sigmoid激活函数
+    model.add(Activation('softmax'))  # 输出用sigmoid激活函数
     # 编译该模型，categorical_crossentropy（亦称作对数损失，logloss），adam是一种优化器，class_mode表示分类模式
     model.compile(loss='categorical_crossentropy', optimizer='sgd')
 
@@ -61,12 +61,12 @@ def lstm(trainData, trainMark, testData, embedding_dim, embedding_matrix, maxlen
     print("Y:", Y)
     # batch_size：整数，指定进行梯度下降时每个batch包含的样本数
     # nb_epoch：整数，训练的轮数，训练数据将会被遍历nb_epoch次
-    model.fit(X, Y, batch_size=16, nb_epoch=10)  # 该函数的X、Y应该是多个输入：numpy list(其中每个元素为numpy.array)，单个输入：numpy.array
+    model.fit(X, Y, batch_size=200, nb_epoch=10)  # 该函数的X、Y应该是多个输入：numpy list(其中每个元素为numpy.array)，单个输入：numpy.array
 
     # 进行预测
     A = np.array(list(testData))  # 输入数据
     print("A:", A)
-    classes = model.predict_classes(A)  # 这个是预测的数据
+    classes = model.predict(A)  # 这个是预测的数据
     return classes
 
 
@@ -75,7 +75,7 @@ if __name__ == '__main__':
     整理好标签数据
     """
     embedding_dim = 100
-    maxlen = 500
+    maxlen = 15772
 
     pd_embedding = get_pickle_data(dp.SOME_BLOGCONTENT_VECTOR_NORMALIZE, columns_name=['blog_id', 'blog_jieba_vector'])
 
@@ -109,7 +109,21 @@ if __name__ == '__main__':
     print("pd_test:\n", pd_test)
 
     # begin training
-    dev_classes = lstm(list(pd_train['embedding_index']), list(pd_train['labels']), list(pd_test['embedding_index']),
+    dev_classes = lstm(list(pd_train['embedding_index'])[:100], list(pd_train['labels'])[:100],
+                       list(pd_test['embedding_index'])[:100],
                        embedding_dim, embedding, maxlen, labels_len)
 
     print("dev classes:", dev_classes)
+
+    # bottleneck
+    import bottleneck as bl
+
+    result = []
+    labels_name = np.array(labels_name)
+    for classes in dev_classes:
+        result.append(labels_name[bl.argpartition(-classes, 3)[:3]])
+
+    pd_result = pd.DataFrame(result)
+    pd_result.to_csv(dp.ResultTxt, sep="\001", header=False, index=False, encoding='utf8')
+
+
